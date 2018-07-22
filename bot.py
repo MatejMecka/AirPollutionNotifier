@@ -28,6 +28,15 @@ count = 0
 
 
 def index_value(level):
+    """
+    Converts the Index Value to a meaningful String describing the level of pollution
+    based on Europeans AQI Index Level
+
+    https://en.wikipedia.org/wiki/Air_quality_index#Europe
+
+    :param level: The AQI Index from the pollution station
+    :return: String, Describtion of Pollution level
+    """
     level = round(float(level))
     if level >= 50 and level <= 75:
         return "Среден"
@@ -38,6 +47,13 @@ def index_value(level):
 
 
 def notify(opstina, nivo, desc):
+    """
+    Checks if it's Polluted and prepares the message for it to be tweeted
+
+    :param opstina: The Municipality where the pollution is
+    :param nivo: The pollution level for the Station
+    :param desc: The Description of the pollution level
+    """
     if int(round(float(nivo))) < 50:
         print("Ниско." + nivo)
         logger.info('Ниско за {} со индекс {} на AQI скала'.format(opstina,int(round(float(nivo)))))
@@ -53,6 +69,11 @@ def notify(opstina, nivo, desc):
 
 
 def send_tweet(msg):
+    """
+    Tweets the Message from notify
+    
+    :param msg: The Tweet Content
+    """
     status = api.update_status(status=msg)
     time.sleep(5)
     #pingstatus = api.update_status(status=pingmessage, in_reply_to_status_id=status.id_str)
