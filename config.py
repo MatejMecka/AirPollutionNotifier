@@ -1,24 +1,29 @@
 # -*- coding: utf-8 -*-
 log_file = "dosadenko_log.log"
+skopje_places = ["karpos", "centar", "rektorat", "lisice", "gazibaba", "miladinovci", "mrsevci"]
 places = {
-	"karpos":"Општина Карпош",
-	"centar":"Оштина Центар",
-	"gazibaba":"Општина Гази Баба",
-	"lisice":"Општина Аеродром",
-	"kumanovo":"Општина Куманово",
-	"rektorat":"Општина Гази баба",
-	"mrsevci":"Општина Илинден",
-	"miladinovci":"Општина Илинден",
-	"kicevo":"Оштина Кичево",
-	"bitola1":"Општина Битола",
-	"bitola2":"Општина Битола",
-	"tetovo":"Општина Тетово",
-	"veles1":"Општина Велес",
-	"veles2":"Општина Велес",
-	"kocani":"Општина Кочани",
-	"kavadarci":"Општина Кавадарци"
+    "Karpos": "Општина Карпош",
+    "Centar": "Оштина Центар",
+    "GaziBaba": "Општина Гази Баба",
+    "Lisice": "Општина Аеродром",
+    "Mobile": "Општина Бутел",
+    "Kumanovo": "Општина Куманово",
+    "Rektorat": "Општина Гази баба",
+    "Mrsevci": "Општина Илинден",
+    "Miladinovci": "Општина Илинден",
+    "Kicevo": "Оштина Кичево",
+    "Bitola1": "Општина Битола",
+    "Bitola2": "Општина Битола",
+    "Tetovo": "Општина Тетово",
+    "Veles1": "Општина Велес",
+    "Veles2": "Општина Велес",
+    "Kocani": "Општина Кочани",
+    "Kavadarci": "Општина Кавадарци",
+    "Lazaropole": "Лазарополе",
+    "Gostivar": "Општина Гостивар",
+    "Strumica": "Општина Струмица"
 }
-url = "http://gorjan.rocks/clients/airquality/returnNewDataWeb.php?lastX=10&type=AQI&location="
+url = "https://mojvozduh.eu/data/api/v3/mk/latestData.css"
 pingmessage = "Град Скопје, Макрадули, Еко Свест, Скопје Смог Аларм?"
 clientKey = ""
 clientSecret = ""

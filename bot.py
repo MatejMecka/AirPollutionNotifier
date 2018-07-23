@@ -55,17 +55,17 @@ def notify(opstina, nivo, desc):
     :param desc: The Description of the pollution level
     """
     if int(round(float(nivo))) < 50:
-        print("Ниско." + nivo)
         logger.info('Ниско за {} со индекс {} на AQI скала'.format(opstina,int(round(float(nivo)))))
     else:
         message = "Еј {}! Индексот на загаденост во моментот е: {}. {} според AQI индексот.".format(
             opstina, desc, int(round(float(nivo))))
-        print(message)
-        if opstina == "karpos" or opstina == "centar" or opstina == "rektorat" or opstina == "lisice" or opstina == "gazibaba" or opstina == "miladinovci" or opstina == "mrsevci":
+        logger.info(message)
+        if opstina in skopje_places:
             ping_message = "Eko_Svest, Skopje Smog Alarm? ^"
             send_tweet(message)
         else:
             send_tweet(message)
+            pass
 
 
 def send_tweet(msg):
@@ -76,17 +76,22 @@ def send_tweet(msg):
     """
     status = api.update_status(status=msg)
     time.sleep(5)
-    #pingstatus = api.update_status(status=pingmessage, in_reply_to_status_id=status.id_str)
+    pingstatus = api.update_status(status=pingmessage, in_reply_to_status_id=status.id_str)
 
 
 def main():
-    for place, person in places.items():
-        print(place)
-        res = requests.get(url + place)
-        data = json.loads(res.text)
-        pollution_level = data[0]["data"]
+    """
+    Driver of the Bot
+
+    Downloads the JSON File, Parses it and sends it to the other functions.
+    """
+    res = requests.get(url)
+    data = json.loads(res.text)
+    for location in data["stations"]:
+        pollution_level = int(location["measurements"][0]["data"])
         description = index_value(pollution_level)
-        notify(person, pollution_level, description)
+        notify(places[location['codeName']], pollution_level, description)
 
 
-main()
+if __name__ == '__main__':
+    main()
